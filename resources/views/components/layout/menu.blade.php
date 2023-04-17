@@ -50,12 +50,21 @@
                     <div class="px-2 space-y-1 text-sm">
                         @foreach($menu as $item)
                             <a @class([
-                                    'bg-slate-200 border-l border-slate-400 !text-slate-800 transition duration-300' => request()->routeIs(data_get($item, 'name')),
+                                    'bg-slate-200 border-l border-slate-400 !text-slate-800 transition duration-300' => request()->routeIs(data_get($item, 'route')),
                                     'text-slate-600 font-semibold hover:bg-slate-300 hover:text-slate-900 group flex items-center px-2 py-2 text-base font-medium rounded-md'
                                ])
-                               href="{{ data_get($item, 'route') }}">
+                                
+                                @if(data_get($item, 'target'))
+                                    target="{{ data_get($item, 'target') }}"
+                                @endif
+                               
+                                href="{{ data_get($item, 'route') }}">
                                 {{ data_get($item, 'label') }}
                             </a>
+
+                            @if(data_get($item, 'separator') )
+                                <hr/>
+                            @endif
                         @endforeach
                     </div>
                 </nav>

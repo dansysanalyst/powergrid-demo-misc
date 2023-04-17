@@ -1,19 +1,23 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Cache;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Cache, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 use WireUi\Traits\Actions;
 
+/**
+ * PowerGrid Example
+ *
+ * @description Validation
+ *
+ * @title Validation
+ *
+ * @route validation
+ */
 final class ValidationTable extends PowerGridComponent
 {
     use ActionButton;
@@ -60,10 +64,10 @@ final class ValidationTable extends PowerGridComponent
         ]);
 
         $this->notification([
-            'title' => 'Profile saved!',
+            'title'       => 'Profile saved!',
             'description' => 'Your profile was successfully saved',
-            'icon' => 'success',
-            'timeout' => 3000,
+            'icon'        => 'success',
+            'timeout'     => 3000,
         ]);
     }
 

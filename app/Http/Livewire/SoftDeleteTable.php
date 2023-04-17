@@ -1,18 +1,22 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Models\Dish;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Soft Delete
+ *
+ * @title Soft Delete
+ *
+ * @route soft-delete
+ */
 final class SoftDeleteTable extends PowerGridComponent
 {
     use ActionButton;
@@ -39,7 +43,7 @@ final class SoftDeleteTable extends PowerGridComponent
 
     public function datasource()
     {
-        return  Dish::with('category');
+        return Dish::with('category');
     }
 
     public function addColumns(): PowerGridEloquent

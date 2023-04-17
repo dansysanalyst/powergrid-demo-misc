@@ -6,6 +6,6 @@
 
 @section('main')
     <div class="space-y-4">
-        <livewire:filters-table :persist="['columns', 'filters']"/>
+        <livewire:filters-persist-table :persist="['columns', 'filters']"/>
     </div>
 @endsection

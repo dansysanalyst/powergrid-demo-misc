@@ -1,19 +1,23 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Models\Dish;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 use WireUi\Traits\Actions;
 
+/**
+ * PowerGrid Example
+ *
+ * @description
+ *
+ * @title Wire Elements Modal
+ *
+ * @route wire-elements-modal
+ */
 final class WireElementsModalTable extends PowerGridComponent
 {
     use ActionButton;
@@ -33,7 +37,7 @@ final class WireElementsModalTable extends PowerGridComponent
 
     public function datasource()
     {
-        return  Dish::with('category');
+        return Dish::with('category');
     }
 
     public function addColumns(): PowerGridEloquent
@@ -81,10 +85,10 @@ final class WireElementsModalTable extends PowerGridComponent
     public function onUpdatedToggleable(string $id, string $field, string $value): void
     {
         $this->notification([
-            'title' => 'onUpdatedToggleable',
+            'title'       => 'onUpdatedToggleable',
             'description' => "Id: {$id}, Field: {$field}, Value: {$value}",
-            'icon' => 'success',
-            'timeout' => 4000,
+            'icon'        => 'success',
+            'timeout'     => 4000,
         ]);
 
         Dish::query()->where('id', $id)->update([
@@ -98,18 +102,18 @@ final class WireElementsModalTable extends PowerGridComponent
             Button::add('edit-stock')
                 ->bladeComponent('button.circle', function (Dish $dish) {
                     return [
-                        'primary' => true,
-                        'icon' => 'pencil',
-                        'wire:click' => '$emit(\'openModal\', \'edit-stock\', {{ json_encode([\'dishId\' => '.$dish->id.']) }})',
+                        'primary'    => true,
+                        'icon'       => 'pencil',
+                        'wire:click' => '$emit(\'openModal\', \'edit-stock\', {{ json_encode([\'dishId\' => ' . $dish->id . ']) }})',
                     ];
                 }),
 
             Button::add('delete-stock')
                 ->bladeComponent('button.circle', function (Dish $dish) {
                     return [
-                        'negative' => true,
-                        'icon' => 'trash',
-                        'wire:click' => '$emit(\'openModal\', \'delete-dish\', {{ json_encode([\'dishId\' => '.$dish->id.']) }})',
+                        'negative'   => true,
+                        'icon'       => 'trash',
+                        'wire:click' => '$emit(\'openModal\', \'delete-dish\', {{ json_encode([\'dishId\' => ' . $dish->id . ']) }})',
                     ];
                 }),
         ];

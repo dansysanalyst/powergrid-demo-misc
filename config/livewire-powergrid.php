@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 return [
 
@@ -29,10 +30,10 @@ return [
         'flatpickr' => [
             'locales' => [
                 'pt_BR' => [
-                    'locale' => 'pt',
+                    'locale'     => 'pt',
                     'dateFormat' => 'd/m/Y H:i',
                     'enableTime' => true,
-                    'time_24hr' => true,
+                    'time_24hr'  => true,
                 ],
             ],
         ],

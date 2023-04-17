@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
@@ -6,15 +7,18 @@ use App\Enums\Diet;
 use App\Models\Dish;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description
+ *
+ * @title Bulk Actions
+ *
+ * @route bulk-actions
+ */
 final class BulkActionTable extends PowerGridComponent
 {
     use ActionButton;
@@ -34,8 +38,8 @@ final class BulkActionTable extends PowerGridComponent
         return array_merge(
             parent::getListeners(),
             [
-                'edit-dish' => 'editDish',
-                'bulkDelete-'.$this->tableName => 'bulkDelete',
+                'edit-dish'                      => 'editDish',
+                'bulkDelete-' . $this->tableName => 'bulkDelete',
             ]
         );
     }
@@ -48,8 +52,8 @@ final class BulkActionTable extends PowerGridComponent
     public function bulkDelete(): void
     {
         $this->emit('openModal', 'delete-dish', [
-            'dishIds' => $this->checkboxValues,
-            'confirmationTitle' => 'Delete dish',
+            'dishIds'                 => $this->checkboxValues,
+            'confirmationTitle'       => 'Delete dish',
             'confirmationDescription' => 'Are you sure you want to delete this dish?',
         ]);
     }
@@ -152,7 +156,7 @@ final class BulkActionTable extends PowerGridComponent
                 return $dish->name;
             })
             ->addColumn('calories', function (Dish $dish) {
-                return $dish->calories.' kcal';
+                return $dish->calories . ' kcal';
             })
             ->addColumn('category_id', function (Dish $dish) {
                 return $dish->category_id;
@@ -164,13 +168,13 @@ final class BulkActionTable extends PowerGridComponent
             ->addColumn('kitchen.description')
             ->addColumn('price')
             ->addColumn('price_BRL', function (Dish $dish) {
-                return 'R$ '.number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('sales_price')
             ->addColumn('sales_price_BRL', function (Dish $dish) {
                 $sales_price = $dish->price + ($dish->price * 0.15);
 
-                return 'R$ '.number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('in_stock')
             ->addColumn('in_stock_label', function (Dish $dish) {
@@ -277,9 +281,9 @@ final class BulkActionTable extends PowerGridComponent
         return [
             Button::add('bulk-delete')
                 ->class('hidden')
-                ->caption(__('Bulk delete (<span x-text="window.pgBulkActions.count(\''.$this->tableName.'\')"></span>)'))
+                ->caption(__('Bulk delete (<span x-text="window.pgBulkActions.count(\'' . $this->tableName . '\')"></span>)'))
                 ->class('cursor-pointer block bg-white-200 text-gray-700 border border-gray-300 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-600 dark:border-gray-500 dark:bg-gray-500 2xl:dark:placeholder-gray-300 dark:text-gray-200 dark:text-gray-300')
-                ->emit('bulkDelete-'.$this->tableName, []),
+                ->emit('bulkDelete-' . $this->tableName, []),
         ];
     }
 
@@ -303,8 +307,8 @@ final class BulkActionTable extends PowerGridComponent
                 ->caption(__('Delete'))
                 ->class('bg-red-500 text-white px-3 py-2 m-1 rounded text-sm')
                 ->openModal('delete-dish', [
-                    'dishId' => 'id',
-                    'confirmationTitle' => 'Delete dish',
+                    'dishId'                  => 'id',
+                    'confirmationTitle'       => 'Delete dish',
                     'confirmationDescription' => 'Are you sure you want to delete this dish?',
                 ]),
         ];

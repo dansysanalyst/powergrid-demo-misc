@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
@@ -6,7 +7,7 @@ use App\Models\Dish;
 use LivewireUI\Modal\ModalComponent;
 use WireUi\Traits\Actions;
 
-class EditStock extends ModalComponent
+final class EditStock extends ModalComponent
 {
     use Actions;
 
@@ -54,8 +55,8 @@ class EditStock extends ModalComponent
             ]);
 
         $this->notification([
-            'title' => 'Dish updated successfully!',
-            'icon' => 'success',
+            'title'   => 'Dish updated successfully!',
+            'icon'    => 'success',
             'timeout' => 2000,
         ]);
 

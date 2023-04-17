@@ -9,7 +9,7 @@
         <div class="p-1 font-semibold">TableName: table-{{ $i }}</div>
 
         <div class="mb-4">
-            <livewire:filters-table :category-id="$i" :table-name="'table-'.$i" />
+            <livewire:multiple-filters-table :category-id="$i" :table-name="'table-'.$i" />
         </div>
     @endfor
 @endsection

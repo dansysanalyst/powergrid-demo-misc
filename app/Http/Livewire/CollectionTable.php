@@ -1,19 +1,22 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
+use Illuminate\Support\{Carbon, Collection};
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Collection
+ *
+ * @title Collection
+ *
+ * @route collection
+ */
 final class CollectionTable extends PowerGridComponent
 {
     use ActionButton;
@@ -41,44 +44,44 @@ final class CollectionTable extends PowerGridComponent
     {
         return collect([
             [
-                'id' => 1,
-                'name' => 'Name 1',
-                'price' => 1.58,
-                'in_stock' => true,
+                'id'         => 1,
+                'name'       => 'Name 1',
+                'price'      => 1.58,
+                'in_stock'   => true,
                 'created_at' => '2021-01-01 00:00:00',
-                'chef_name' => '',
+                'chef_name'  => '',
             ],
             [
-                'id' => 2,
-                'name' => 'Name 2',
-                'price' => 1.68,
-                'in_stock' => true,
+                'id'         => 2,
+                'name'       => 'Name 2',
+                'price'      => 1.68,
+                'in_stock'   => true,
                 'created_at' => '2021-02-02 00:00:00',
-                'chef_name' => null,
+                'chef_name'  => null,
             ],
             [
-                'id' => 3,
-                'name' => 'Name 3',
-                'price' => 1.78,
-                'in_stock' => false,
+                'id'         => 3,
+                'name'       => 'Name 3',
+                'price'      => 1.78,
+                'in_stock'   => false,
                 'created_at' => '2021-03-03 00:00:00',
-                'chef_name' => 'Luan',
+                'chef_name'  => 'Luan',
             ],
             [
-                'id' => 4,
-                'name' => 'Name 4',
-                'price' => 1.88,
-                'in_stock' => true,
+                'id'         => 4,
+                'name'       => 'Name 4',
+                'price'      => 1.88,
+                'in_stock'   => true,
                 'created_at' => '2021-04-04 00:00:00',
-                'chef_name' => 'Luan',
+                'chef_name'  => 'Luan',
             ],
             [
-                'id' => 5,
-                'name' => 'Name 5',
-                'price' => 1.98,
-                'in_stock' => false,
+                'id'         => 5,
+                'name'       => 'Name 5',
+                'price'      => 1.98,
+                'in_stock'   => false,
                 'created_at' => '2021-05-05 00:00:00',
-                'chef_name' => 'Luan',
+                'chef_name'  => 'Luan',
             ],
         ]);
     }

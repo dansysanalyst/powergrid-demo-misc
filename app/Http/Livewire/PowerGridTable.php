@@ -1,23 +1,25 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
-use PowerComponents\LivewirePowerGrid\Rules\Rule;
-use PowerComponents\LivewirePowerGrid\Rules\RuleActions;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description PowerGrid Basic
+ *
+ * @title PowerGrid Demo
+ *
+ * @route powergrid
+ */
 final class PowerGridTable extends PowerGridComponent
 {
     use ActionButton;
@@ -98,7 +100,9 @@ final class PowerGridTable extends PowerGridComponent
             ->addColumn('name')
             ->addColumn('name_lower', fn (User $model) => strtolower(e($model->name)))
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
+            ->addColumn(
+                'created_at_formatted',
+                fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s')
             );
     }
 

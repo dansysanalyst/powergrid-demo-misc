@@ -1,20 +1,22 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Models\Dish;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
-use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Export
+ *
+ * @title Export
+ *
+ * @route export
+ */
 final class ExportTable extends PowerGridComponent
 {
     use ActionButton;
@@ -50,7 +52,7 @@ final class ExportTable extends PowerGridComponent
 
     public function datasource()
     {
-        return  Dish::with('category');
+        return Dish::with('category');
     }
 
     public function addColumns(): PowerGridEloquent
@@ -59,7 +61,7 @@ final class ExportTable extends PowerGridComponent
             ->addColumn('id')
             ->addColumn('name')
             ->addColumn('html_name', function ($dish) {
-                return '<b>'.$dish->name.'</b>';
+                return '<b>' . $dish->name . '</b>';
             })
             ->addColumn('chef_name')
             ->addColumn('price')

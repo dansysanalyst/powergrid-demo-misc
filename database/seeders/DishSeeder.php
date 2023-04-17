@@ -1,13 +1,13 @@
 <?php
+declare(strict_types = 1);
 
 namespace Database\Seeders;
 
-use App\Models\Dish;
-use App\Models\Kitchen;
+use App\Models\{Dish, Kitchen};
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-class DishSeeder extends Seeder
+final class DishSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -122,16 +122,15 @@ class DishSeeder extends Seeder
         ];
 
         $kitchens = Kitchen::all();
-        $faker = Faker::create();
+        $faker    = Faker::create();
 
         foreach ($dishes as $dish) {
-
             $dish += [
-                'kitchen_id' => $kitchens->random()->id,
-                'calories' => $faker->biasedNumberBetween($min = 40, $max = 890, $function = 'sqrt'),
+                'kitchen_id'  => $kitchens->random()->id,
+                'calories'    => $faker->biasedNumberBetween($min = 40, $max = 890, $function = 'sqrt'),
                 'produced_at' => $faker->dateTimeBetween($startDate = '-1 months', $endDate = 'now')->format('Y-m-d'),
-                'diet' => $faker->randomElement([0, 1, 2]), //Diet::cases()
-                'serving_at' => $faker->randomElement(['restaurant', 'room service', 'pool bar']),
+                'diet'        => $faker->randomElement([0, 1, 2]), //Diet::cases()
+                'serving_at'  => $faker->randomElement(['restaurant', 'room service', 'pool bar']),
             ];
 
             Dish::create($dish);

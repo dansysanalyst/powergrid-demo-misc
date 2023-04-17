@@ -1,7 +1,11 @@
 @extends('layouts.base')
 
 @section('title')
-    Batch Export
+    {{ $title }}
+@endsection
+
+@section('description')
+    {{ $description }}
 @endsection
 
 @section('main')

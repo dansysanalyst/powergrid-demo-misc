@@ -1,11 +1,20 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
 use App\Helpers\PowerGridThemes\TailwindHeaderFixed;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
+use PowerComponents\LivewirePowerGrid\{Footer, Header};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Header Fixed
+ *
+ * @title Header Fixed
+ *
+ * @route header-fixed
+ */
 final class HeaderFixedTable extends SimpleTable
 {
     public array $perPageValues = [0];

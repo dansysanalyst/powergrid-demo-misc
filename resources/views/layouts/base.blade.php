@@ -58,6 +58,13 @@
 
                     <div class="h-full border-2 border-slate-200 border-dashed rounded-lg p-6">
                         <div class="font-bold text-lg text-slate-700">@yield('title')</div>
+
+                        <div class="p-2 text-slate-700">@yield('description')</div>
+                        
+                        @isset($code)
+                            <x-code>{!! $code !!}</x-code>
+                        @endisset
+
                         @yield('main')
                     </div>
                 </div>
@@ -69,5 +76,6 @@
 @livewireScripts
 @livewire('livewire-ui-modal')
 <x-notifications />
+
 </body>
 </html>

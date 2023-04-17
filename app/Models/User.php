@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -8,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
@@ -27,9 +28,9 @@ class User extends Authenticatable
 
     protected static function booted(): void
     {
-        static::created(fn (User $user) => self::clearCache());
-        static::updated(fn (User $user) => self::clearCache());
-        static::deleted(fn (User $user) => self::clearCache());
+        self::created(fn (User $user) => self::clearCache());
+        self::updated(fn (User $user) => self::clearCache());
+        self::deleted(fn (User $user) => self::clearCache());
     }
 
     private static function clearCache(): void

@@ -27,3 +27,125 @@ body {
     background-color: #b6c0ce;
     border-radius: 4px;
 }
+
+
+/*
+
+ Margin and rounding are personal preferences,
+
+ overflow-x-auto is recommended.
+
+*/
+
+pre {
+
+    border-radius: 0.25rem;
+
+    margin-top: 1rem;
+
+    margin-bottom: 1rem;
+
+    overflow-x: auto;
+
+}
+
+ 
+
+/*
+
+ Add some vertical padding and expand the width
+
+ to fill its container. The horizontal padding
+
+ comes at the line level so that background
+
+ colors extend edge to edge.
+
+*/
+
+pre code.torchlight {
+
+    display: block;
+
+    min-width: -webkit-max-content;
+
+    min-width: -moz-max-content;
+
+    min-width: max-content;
+
+    padding-top: 1rem;
+
+    padding-bottom: 1rem;
+
+}
+
+ 
+
+/*
+
+ Horizontal line padding to match the vertical
+
+ padding from the code block above.
+
+*/
+
+pre code.torchlight .line {
+
+    padding-left: 1rem;
+
+    padding-right: 1rem;
+
+}
+
+ 
+
+/*
+
+ Push the code away from the line numbers and
+
+ summary caret indicators.
+
+*/
+
+pre code.torchlight .line-number,
+
+pre code.torchlight .summary-caret {
+
+    margin-right: 1rem;
+
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+pre[class*="language-"] {
+  position: relative;
+  overflow: auto;
+
+  /* make space  */
+  margin: 5px 0;
+  padding: 1.75rem 0 1.75rem 1rem;
+  border-radius: 10px;
+}
+
+pre[class*="language-"] button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  font-size: 0.9rem;
+  padding: 0.15rem;
+  background-color: #828282;
+
+  border: ridge 1px #7b7b7c;
+  border-radius: 5px;
+  text-shadow: #c4c4c4 0 0 2px;
+}
+
+pre[class*="language-"] button:hover {
+  cursor: pointer;
+  background-color: #bcbabb;
+}

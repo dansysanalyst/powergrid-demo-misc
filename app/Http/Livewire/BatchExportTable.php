@@ -1,20 +1,24 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Dish;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
-use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\{Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description This example shows how to batch export.
+ *
+ * @title Batch Export
+ *
+ * @route batch
+ */
 final class BatchExportTable extends PowerGridComponent
 {
     use ActionButton;
@@ -38,7 +42,7 @@ final class BatchExportTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV)
-                ->queues(6)
+                ->queues('6')
                 ->onQueue('my-dishes')
                 ->onConnection('redis'),
 
@@ -88,7 +92,7 @@ final class BatchExportTable extends PowerGridComponent
                 return $dish->name;
             })
             ->addColumn('calories', function (Dish $dish) {
-                return $dish->calories.' kcal';
+                return $dish->calories . ' kcal';
             })
             ->addColumn('category_id', function (Dish $dish) {
                 return $dish->category_id;
@@ -100,13 +104,13 @@ final class BatchExportTable extends PowerGridComponent
             ->addColumn('kitchen.description')
             ->addColumn('price')
             ->addColumn('price_BRL', function (Dish $dish) {
-                return 'R$ '.number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('sales_price')
             ->addColumn('sales_price_BRL', function (Dish $dish) {
                 $sales_price = $dish->price + ($dish->price * 0.15);
 
-                return 'R$ '.number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('in_stock')
             ->addColumn('in_stock_label', function (Dish $dish) {
@@ -114,7 +118,7 @@ final class BatchExportTable extends PowerGridComponent
             })
 
             ->addColumn('diet', function (Dish $dish) {
-            return \App\Enums\Diet::from($dish->diet)->labels();
+                return \App\Enums\Diet::from($dish->diet)->labels();
             })
 
             ->addColumn('produced_at')

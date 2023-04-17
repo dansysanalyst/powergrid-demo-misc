@@ -1,19 +1,24 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Livewire;
 
 use App\Models\Dish;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Blade;
-use PowerComponents\LivewirePowerGrid\Cache;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Cache, Column, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Simple
+ *
+ * @title Simple
+ *
+ * @route simple
+ */
 class SimpleTable extends PowerGridComponent
 {
     use ActionButton;
@@ -37,7 +42,7 @@ class SimpleTable extends PowerGridComponent
 
     public function datasource()
     {
-        return  Dish::with('category');
+        return Dish::with('category');
     }
 
     public function addColumns(): PowerGridEloquent

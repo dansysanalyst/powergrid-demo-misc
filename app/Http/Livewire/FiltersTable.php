@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
@@ -8,18 +9,20 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Blade;
 use NumberFormatter;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 use WireUi\Traits\Actions;
 
+/**
+ * PowerGrid Example
+ *
+ * @description Filters
+ *
+ * @title Filters
+ *
+ * @route filters
+ */
 final class FiltersTable extends PowerGridComponent
 {
     use ActionButton;
@@ -36,7 +39,7 @@ final class FiltersTable extends PowerGridComponent
     public function setUp(): array
     {
         if ($this->filtersOutside) {
-            $this->dispatchBrowserEvent('toggle-filters-'.$this->tableName);
+            $this->dispatchBrowserEvent('toggle-filters-' . $this->tableName);
         }
 
         return [
@@ -60,7 +63,7 @@ final class FiltersTable extends PowerGridComponent
         if ($this->filtersOutside) {
             config(['livewire-powergrid.filter' => 'outside']);
 
-            $this->dispatchBrowserEvent('toggle-filters-'.$this->tableName);
+            $this->dispatchBrowserEvent('toggle-filters-' . $this->tableName);
         }
 
         return Dish::query()
@@ -95,7 +98,7 @@ final class FiltersTable extends PowerGridComponent
             ->addColumn('serving_at')
             ->addColumn('calories')
             ->addColumn('calories', function (Dish $dish) {
-                return $dish->calories.' kcal';
+                return $dish->calories . ' kcal';
             })
             ->addColumn('category_id', function ($dish) {
                 return $dish->category_id;
@@ -111,13 +114,13 @@ final class FiltersTable extends PowerGridComponent
                 return \App\Enums\Diet::from($dish->diet)->labels();
             })
             ->addColumn('price_BRL', function (Dish $dish) {
-                return 'R$ '.number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('sales_price')
             ->addColumn('sales_price_BRL', function (Dish $dish) {
                 $sales_price = $dish->price + ($dish->price * 0.15);
 
-                return 'R$ '.number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
             })
             ->addColumn('in_stock')
             ->addColumn('in_stock_label', function ($entry) {
@@ -189,9 +192,9 @@ HTML);
             Button::make('delete')
                 ->bladeComponent('button.circle', function (Dish $dish) {
                     return [
-                        'negative' => true,
-                        'icon' => 'trash',
-                        'wire:click' => 'editDish(\''.$dish->id.'\')',
+                        'negative'   => true,
+                        'icon'       => 'trash',
+                        'wire:click' => 'editDish(\'' . $dish->id . '\')',
                     ];
                 }),
         ];
@@ -200,13 +203,13 @@ HTML);
     public function editDish(int $dishId): void
     {
         $this->notification()
-            ->info('Edit DishId: '.$dishId);
+            ->info('Edit DishId: ' . $dishId);
     }
 
     public function deleteDish(int $dishId): void
     {
         $this->notification()
-            ->success('Edit DishId: '.$dishId);
+            ->success('Edit DishId: ' . $dishId);
     }
 
     public function filters(): array

@@ -1,23 +1,24 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Http\Livewire;
 
-use App\Models\Dish;
-use App\Models\Kitchen;
+use App\Models\{Dish, Kitchen};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
-use PowerComponents\LivewirePowerGrid\Rules\Rule;
-use PowerComponents\LivewirePowerGrid\Rules\RuleActions;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
+/**
+ * PowerGrid Example
+ *
+ * @description Dishes
+ *
+ * @title Dishes
+ *
+ * @route dish
+ */
 final class DishesTable extends PowerGridComponent
 {
     use ActionButton;
@@ -63,8 +64,8 @@ final class DishesTable extends PowerGridComponent
     public function bulkDelete(): void
     {
         $this->emit('openModal', 'delete-dish', [
-            'dishIds' => $this->checkboxValues,
-            'confirmationTitle' => 'Delete dish',
+            'dishIds'                 => $this->checkboxValues,
+            'confirmationTitle'       => 'Delete dish',
             'confirmationDescription' => 'Are you sure you want to delete this dish?',
         ]);
     }
@@ -169,7 +170,7 @@ final class DishesTable extends PowerGridComponent
                 return $dish->name;
             })
             ->addColumn('calories', function (Dish $dish) {
-                return $dish->calories.' kcal';
+                return $dish->calories . ' kcal';
             })
             ->addColumn('category_id', function (Dish $dish) {
                 return $dish->category_id;
@@ -189,7 +190,7 @@ final class DishesTable extends PowerGridComponent
             /*** PRICE ***/
             ->addColumn('price')
             ->addColumn('price_BRL', function (Dish $dish) {
-                return 'R$ '.number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($dish->price, 2, ',', '.'); //R$ 1.000,00
             })
 
             /*** SALE'S PRICE ***/
@@ -197,7 +198,7 @@ final class DishesTable extends PowerGridComponent
             ->addColumn('sales_price_BRL', function (Dish $dish) {
                 $sales_price = $dish->price + ($dish->price * 0.15);
 
-                return 'R$ '.number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
+                return 'R$ ' . number_format($sales_price, 2, ',', '.'); //R$ 1.000,00
             })
 
             /*** STOCK ***/
@@ -333,18 +334,18 @@ final class DishesTable extends PowerGridComponent
             Button::add('edit-stock')
                 ->bladeComponent('button.circle', function (Dish $dish) {
                     return [
-                        'primary' => true,
-                        'icon' => 'pencil',
-                        'wire:click' => '$emit(\'openModal\', \'edit-stock\', {{ json_encode([\'dishId\' => '.$dish->id.']) }})',
+                        'primary'    => true,
+                        'icon'       => 'pencil',
+                        'wire:click' => '$emit(\'openModal\', \'edit-stock\', {{ json_encode([\'dishId\' => ' . $dish->id . ']) }})',
                     ];
                 }),
 
             Button::add('delete-stock')
                 ->bladeComponent('button.circle', function (Dish $dish) {
                     return [
-                        'negative' => true,
-                        'icon' => 'trash',
-                        'wire:click' => '$emit(\'openModal\', \'delete-dish\', {{ json_encode([\'dishId\' => '.$dish->id.']) }})',
+                        'negative'   => true,
+                        'icon'       => 'trash',
+                        'wire:click' => '$emit(\'openModal\', \'delete-dish\', {{ json_encode([\'dishId\' => ' . $dish->id . ']) }})',
                     ];
                 }),
         ];

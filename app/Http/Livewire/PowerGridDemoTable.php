@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /*
 |****************************************************************************************************************
@@ -15,20 +16,11 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Faker\Factory as FakerFactory;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
-use PowerComponents\LivewirePowerGrid\Button;
-use PowerComponents\LivewirePowerGrid\Column;
-use PowerComponents\LivewirePowerGrid\Exportable;
+use Illuminate\Support\{Carbon, Collection};
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Footer;
-use PowerComponents\LivewirePowerGrid\Header;
-use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridComponent;
-use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
-use PowerComponents\LivewirePowerGrid\Rules\Rule;
-use PowerComponents\LivewirePowerGrid\Rules\RuleActions;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class PowerGridDemoTable extends PowerGridComponent
 {
@@ -55,7 +47,8 @@ final class PowerGridDemoTable extends PowerGridComponent
             [
                 'rowActionEvent',
                 'bulkActionEvent',
-            ]);
+            ]
+        );
     }
 
     /*
@@ -65,7 +58,7 @@ final class PowerGridDemoTable extends PowerGridComponent
     */
     public function rowActionEvent(array $data): void
     {
-        $message = 'You have clicked #'.$data['id'];
+        $message = 'You have clicked #' . $data['id'];
 
         $this->dispatchBrowserEvent('showAlert', ['message' => $message]);
     }
@@ -80,7 +73,7 @@ final class PowerGridDemoTable extends PowerGridComponent
 
         $ids = implode(', ', $this->checkboxValues);
 
-        $this->dispatchBrowserEvent('showAlert', ['message' => 'You have selected IDs: '.$ids]);
+        $this->dispatchBrowserEvent('showAlert', ['message' => 'You have selected IDs: ' . $ids]);
     }
 
     /*
@@ -249,11 +242,11 @@ final class PowerGridDemoTable extends PowerGridComponent
      */
     public function actions(): array
     {
-       return [
-           Button::make('info', 'Click me')
-               ->class('bg-indigo-500 hover:bg-indigo-600 cursor-pointer text-white px-3 py-2 text-sm rounded-md')
-               ->emit('rowActionEvent', ['id' => 'id']),
-       ];
+        return [
+            Button::make('info', 'Click me')
+                ->class('bg-indigo-500 hover:bg-indigo-600 cursor-pointer text-white px-3 py-2 text-sm rounded-md')
+                ->emit('rowActionEvent', ['id' => 'id']),
+        ];
     }
 
     /*
@@ -343,11 +336,11 @@ final class PowerGridDemoTable extends PowerGridComponent
 
         for ($i = 1; $i <= 20; $i++) {
             $user = new User([
-                'name' => $faker->name(),
-                'email' => $faker->unique()->safeEmail(),
+                'name'              => $faker->name(),
+                'email'             => $faker->unique()->safeEmail(),
                 'email_verified_at' => (boolval(rand(0, 1)) === true ? now() : null),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-                'remember_token' => 'hKNojklraZ',
+                'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+                'remember_token'    => 'hKNojklraZ',
             ]);
 
             $user->setAttribute('id', $i);

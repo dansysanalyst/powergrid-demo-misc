@@ -1,11 +1,12 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Helpers\PowerGridThemes;
 
 use PowerComponents\LivewirePowerGrid\Themes\Components\Table;
 use PowerComponents\LivewirePowerGrid\Themes\Theme;
 
-class TailwindHeaderFixed extends \PowerComponents\LivewirePowerGrid\Themes\Tailwind
+final class TailwindHeaderFixed extends \PowerComponents\LivewirePowerGrid\Themes\Tailwind
 {
     public function table(): Table
     {

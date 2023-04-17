@@ -1,11 +1,11 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Cache;
  * @property-read Kitchen $kitchen
  * @property-read Category $category
  */
-class Dish extends Model
+final class Dish extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -41,9 +41,9 @@ class Dish extends Model
 
     protected static function booted(): void
     {
-        static::created(fn (Dish $dish) => self::clearCache());
-        static::updated(fn (Dish $dish) => self::clearCache());
-        static::deleted(fn (Dish $dish) => self::clearCache());
+        self::created(fn (Dish $dish) => self::clearCache());
+        self::updated(fn (Dish $dish) => self::clearCache());
+        self::deleted(fn (Dish $dish) => self::clearCache());
     }
 
     private static function clearCache(): void
