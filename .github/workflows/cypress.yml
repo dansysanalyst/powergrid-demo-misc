@@ -1,7 +1,7 @@
 # GitHub Actions Workflow generated with Ghygen
 # Original configuration: https://ghygen.hi-folks.dev?code=1cd3007f2777cd55000cf663d42902e1
 name: Cypress
-on: [ workflow_dispatch ]
+on: [push, pull_request]
 
 jobs:
   laravel-tests:
@@ -48,8 +48,8 @@ jobs:
           php-version: ${{ matrix.php-versions }}
       - name: Get Composer Cache Directory 2
         id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v3
         id: actions-cache
         with:
